@@ -1,15 +1,18 @@
 {
   "expo": {
-    "name": "Onboarding-Platform",
-    "slug": "Onboarding-Platform",
+    "name": "Onboarding Platform",
+    "slug": "onboarding-platform",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "onboardingplatform",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "description": "A production-ready mobile onboarding platform with reusable components, form validation, and backend integration.",
+    "githubUrl": "https://github.com/yourusername/onboarding-platform",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourcompany.onboardingplatform"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,6 +21,12 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
+      "package": "com.yourcompany.onboardingplatform",
+      "versionCode": 1,
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
