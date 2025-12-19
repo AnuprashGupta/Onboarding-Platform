@@ -67,10 +67,13 @@ function validateOnboardingData(data) {
 // Handle POST /api/onboard
 async function handleSubmitOnboarding(request, env) {
   try {
+    console.log('📥 Received onboarding submission request');
     const data = await request.json();
+    console.log('📋 Data received:', { name: data.name, email: data.email, documentCount: data.documents?.length });
     
     // Validate data
     const validation = validateOnboardingData(data);
+    console.log('✅ Validation result:', validation.valid ? 'PASSED' : 'FAILED', validation.errors);
     if (!validation.valid) {
       return new Response(
         JSON.stringify({
@@ -90,6 +93,7 @@ async function handleSubmitOnboarding(request, env) {
     // Generate ID and timestamps
     const id = generateId();
     const now = new Date().toISOString();
+    console.log('🆔 Generated ID:', id);
 
     const onboardingData = {
       id,
@@ -109,14 +113,17 @@ async function handleSubmitOnboarding(request, env) {
     };
 
     // Store in KV
+    console.log('💾 Storing data in KV with ID:', id);
     await env.ONBOARDING_DATA.put(id, JSON.stringify(onboardingData), {
       metadata: {
         email: data.email,
         createdAt: now,
       },
     });
+    console.log('✅ Data stored successfully!');
 
     // Also store by email for easy lookup
+    console.log('📧 Creating email index:', `email:${data.email}`);
     await env.ONBOARDING_DATA.put(
       `email:${data.email}`,
       id,
@@ -124,6 +131,7 @@ async function handleSubmitOnboarding(request, env) {
         expirationTtl: 60 * 60 * 24 * 30, // 30 days
       }
     );
+    console.log('🎉 Onboarding completed successfully for:', data.name);
 
     return new Response(
       JSON.stringify({
@@ -160,9 +168,11 @@ async function handleSubmitOnboarding(request, env) {
 // Handle GET /api/onboard/:id
 async function handleGetOnboarding(id, env) {
   try {
+    console.log('🔍 Fetching onboarding data for ID:', id);
     const data = await env.ONBOARDING_DATA.get(id);
 
     if (!data) {
+      console.log('❌ Data not found for ID:', id);
       return new Response(
         JSON.stringify({
           success: false,
@@ -178,6 +188,7 @@ async function handleGetOnboarding(id, env) {
       );
     }
 
+    console.log('✅ Data found and returning');
     return new Response(
       JSON.stringify({
         success: true,

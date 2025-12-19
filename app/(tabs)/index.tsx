@@ -70,8 +70,8 @@ export default function OnboardingScreen() {
         documents,
       };
 
-      // Use mock submission for demo (change to submitOnboarding when backend is ready)
-      const response = await OnboardingService.mockSubmitOnboarding(payload);
+      // Using real Cloudflare Workers backend
+      const response = await OnboardingService.submitOnboarding(payload);
 
       if (response.success) {
         setSubmittedData(response.data);

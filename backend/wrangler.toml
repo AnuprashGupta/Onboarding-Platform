@@ -8,7 +8,7 @@ compatibility_date = "2024-01-01"
 # KV namespace binding
 [[kv_namespaces]]
 binding = "ONBOARDING_DATA"
-id = "YOUR_KV_NAMESPACE_ID" # Replace with your actual KV namespace ID
+id = "6b1ee05bef3b47d097f92633f4a2f438"
 
 # Environment variables (optional)
 [vars]

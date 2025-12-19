@@ -6,6 +6,7 @@ import Animated, {
   withTiming,
   Easing,
   cancelAnimation,
+  runOnJS,
 } from 'react-native-reanimated';
 
 export interface CounterTimerProps {
@@ -64,9 +65,12 @@ export const CounterTimer: React.FC<CounterTimerProps> = ({
           easing: easingFunctions[easing],
         },
         (finished) => {
+          'worklet';
           if (finished) {
-            setState('completed');
-            onComplete?.();
+            runOnJS(setState)('completed');
+            if (onComplete) {
+              runOnJS(onComplete)();
+            }
           }
         }
       );
@@ -82,9 +86,12 @@ export const CounterTimer: React.FC<CounterTimerProps> = ({
           easing: easingFunctions[easing],
         },
         (finished) => {
+          'worklet';
           if (finished) {
-            setState('completed');
-            onComplete?.();
+            runOnJS(setState)('completed');
+            if (onComplete) {
+              runOnJS(onComplete)();
+            }
           }
         }
       );
@@ -117,9 +124,12 @@ export const CounterTimer: React.FC<CounterTimerProps> = ({
         easing: easingFunctions[easing],
       },
       (finished) => {
+        'worklet';
         if (finished) {
-          setState('completed');
-          onComplete?.();
+          runOnJS(setState)('completed');
+          if (onComplete) {
+            runOnJS(onComplete)();
+          }
         }
       }
     );
