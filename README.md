@@ -162,33 +162,76 @@ Create `.env` in project root (optional):
 
 ## 📱 Building APK
 
-### **Method 1: EAS Build (Recommended)**
+### **Method 1: Local Build (Tested & Working)**
+
+This method builds the APK directly on your machine using Gradle.
+
+**Step 1: Generate Native Android Code**
+```bash
+npx expo prebuild --platform android
+```
+
+**Step 2: Build Release APK**
+
+**On Windows:**
+```bash
+cd android
+.\gradlew.bat assembleRelease
+```
+
+**On Mac/Linux:**
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+**Step 3: Find Your APK**
+```
+📁 Location: android/app/build/outputs/apk/release/app-release.apk
+📦 Size: ~85 MB
+```
+
+**Step 4: Test the APK**
+```bash
+# Install on connected device/emulator
+adb install android/app/build/outputs/apk/release/app-release.apk
+
+# Or drag-and-drop the APK onto your emulator
+```
+
+**Step 5: Upload to Google Drive**
+1. Open Google Drive
+2. Create folder: "Onboarding-Platform-Assignment"
+3. Upload `app-release.apk`
+4. Upload `README.md`
+5. Set sharing: "Anyone with link can view"
+6. Copy the link for submission
+
+---
+
+### **Method 2: EAS Build (Cloud Alternative)**
+
+This builds the APK in the cloud (takes ~15 minutes).
 
 ```bash
-# Install & login
+# 1. Install & login
 npm install -g eas-cli
 eas login
 
-# Build APK
+# 2. Configure project (first time only)
+eas build:configure
+# Answer "y" to create EAS project
+
+# 3. Build APK
 eas build --platform android --profile preview
 
-# Download APK when ready (~15 min)
-# Upload to Google Drive for submission
+# 4. Wait for build to complete (~15 minutes)
+# You'll receive a download link via email and CLI
+
+# 5. Download APK and upload to Google Drive
 ```
 
-### **Method 2: Local Build**
-
-```bash
-# Generate native code
-npx expo prebuild
-
-# Build APK
-cd android
-./gradlew assembleRelease  # Unix/Mac
-gradlew.bat assembleRelease  # Windows
-
-# APK location: android/app/build/outputs/apk/release/app-release.apk
-```
+**Tip**: Use Method 1 (Local Build) if you want the APK immediately!
 
 ---
 

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedProps,
-  withTiming,
   Easing,
   cancelAnimation,
   runOnJS,
+  useSharedValue,
+  withTiming
 } from 'react-native-reanimated';
 
 export interface CounterTimerProps {
